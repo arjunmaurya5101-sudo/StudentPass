@@ -158,8 +158,8 @@ $('#trackForm').onsubmit = e => {
 $('#login').onsubmit = e => {
   e.preventDefault();
   const f = e.target.elements;
-  if (f.u.value.trim() === ADMIN.u && f.p.value === ADMIN.p) { isAdmin = true; f.p.value = ''; show('admin'); toast('Signed in as admin.'); }
-  else toast('Wrong username or password.', 'bad');
+  if (f.u.value.trim().toLowerCase() === ADMIN.u && f.p.value.trim() === ADMIN.p) { isAdmin = true; f.p.value = ''; show('admin'); toast('Signed in as admin.'); }
+  else toast('Wrong username or password. Use admin / admin123.', 'bad');
 };
 $('#logout').onclick = () => { isAdmin = false; show('admin'); toast('Signed out.'); };
 
