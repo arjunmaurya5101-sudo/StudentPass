@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Student Transport Pass Request System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">TP</span><div><h1>Transport Pass Desk</h1><p>Student Transport Pass Request System</p></div></div>
+  <nav aria-label="Main">
+    <button data-view="student" class="on">Request a pass</button>
+    <button data-view="track">Track request</button>
+    <button data-view="admin">Admin panel</button>
+  </nav>
+</header>
+
+<main>
+  <section id="student" class="view">
+    <h2>Request a transport pass</h2>
+    <p class="mut">Fill in your details. The fee updates as you pick a route and pass type.</p>
+    <form id="reqForm" class="panel" novalidate></form>
+  </section>
+
+  <section id="track" class="view" hidden>
+    <h2>Track your request</h2>
+    <form id="trackForm" class="panel row" novalidate>
+      <label>Registration number<input id="trackReg" inputmode="numeric" placeholder="e.g. 12301001"></label>
+      <button class="btn">Find my requests</button>
+    </form>
+    <div id="trackOut"></div>
+  </section>
+
+  <section id="admin" class="view" hidden>
+    <form id="login" class="panel" novalidate>
+      <h2>Admin sign in</h2>
+      <div class="grid">
+        <label>Username<input name="u" autocomplete="username"></label>
+        <label>Password<input name="p" type="password" autocomplete="current-password"></label>
+      </div>
+      <p class="mut">Demo login: admin / admin123</p>
+      <button class="btn">Sign in</button>
+    </form>
+
+    <div id="adminBody" hidden>
+      <div class="row between">
+        <h2>Admin panel</h2>
+        <div class="row"><button class="btn ghost" id="export">Export CSV</button><button class="btn ghost" id="logout">Sign out</button></div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="panel"><h3>Requests by route</h3><div id="bars"></div></div>
+      <div class="panel">
+        <div class="filters">
+          <input id="q" type="search" placeholder="Search name, reg. no., ID or email" aria-label="Search">
+          <select id="fs" aria-label="Filter by status"><option value="">All statuses</option><option>Pending</option><option>Approved</option><option>Rejected</option></select>
+          <select id="fr" aria-label="Filter by route"><option value="">All routes</option></select>
+          <select id="ft" aria-label="Filter by pass type"><option value="">All pass types</option></select>
+          <button class="btn ghost" id="clear">Clear filters</button>
+        </div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>ID</th><th>Student</th><th>Route</th><th>Pass</th><th>Fee</th><th>Start</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <p id="empty" class="mut"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog id="dlg"><form id="editForm" novalidate></form></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
